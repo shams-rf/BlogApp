@@ -9,9 +9,12 @@ function CreatePost() {
     const [title, setTitle] = useState("");
     const [postText, setPostText] = useState("");
 
+    // Get reference to firestore collection
     const postsCollectionRef = collection(db, "posts");
     let navigate = useNavigate();
 
+    // Method to create post document & add it to database collection
+    // Redirect user back to home
     const CreatePost = async () => {
         await addDoc(postsCollectionRef, {
             title,
