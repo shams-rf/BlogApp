@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {addDoc, collection} from "firebase/firestore";
 import {auth, db} from "../firebase-config";
 import {useNavigate} from "react-router-dom";
 
 
-function CreatePost() {
+function CreatePost({isAuth}) {
     // Keep track of user input for title and post text
     const [title, setTitle] = useState("");
     const [postText, setPostText] = useState("");
@@ -23,6 +23,12 @@ function CreatePost() {
         });
         navigate("/");
     };
+
+    useEffect(() => {
+       if(!isAuth) {
+        navigate("/login");
+       }
+    });
 
     return (
         <div className="createPostPage">
