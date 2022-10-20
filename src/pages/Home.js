@@ -3,9 +3,13 @@ import {collection, getDocs} from "firebase/firestore";
 import {db} from "../firebase-config";
 
 function Home() {
+    // State to keep track of all posts
     const [postsList, setPostsList] = useState([]);
     const postsCollectionRef = collection(db, "posts");
 
+    // Run when Home component renders
+    // Get all documents from posts collection and put them in state
+    // Run getPosts method
     useEffect(() => {
         const getPosts = async () => {
             const data = await getDocs(postsCollectionRef);
