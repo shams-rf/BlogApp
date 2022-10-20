@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {collection, getDocs} from "firebase/firestore";
-import {db} from "../firebase-config";
+import {collection, getDocs, deleteDoc, doc} from "firebase/firestore";
+import {auth, db} from "../firebase-config";
 
-function Home() {
+function Home(isAuth) {
     // State to keep track of all posts
     const [postsList, setPostsList] = useState([]);
     const postsCollectionRef = collection(db, "posts");
@@ -19,6 +19,11 @@ function Home() {
         getPosts();
     });
 
+    const deletePost = async (id) => {
+        const postDoc = doc(db, "posts", id);
+        await deleteDoc(postDoc);
+    }
+
     return (
         <div className="homePage">
             {postsList.map((post) => {
@@ -27,6 +32,11 @@ function Home() {
                         <div className="postHeader">
                             <div className="title">
                                 <h3>{post.title}</h3>
+                            </div>
+                            <div className="deletePost">
+                                <button onClick={() => {
+                                    deletePost(post.id);
+                                }}>&#128465;</button>
                             </div>
                         </div>
                         <div className="postTextContainer">{post.postText}</div>
