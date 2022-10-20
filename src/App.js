@@ -9,8 +9,13 @@ import {auth} from "./firebase-config";
 
 
 function App() {
+    // Keep track of logged in state
     const[isAuth, setIsAuth] = useState(false);
 
+    // Method to sign out a user
+    // Call sign out method from firebase
+    // Clear local storage to delete 'isAuth = true' variable
+    // Redirect user to login page
     const signUserOut = () => {
         signOut(auth).then(() => {
             localStorage.clear();

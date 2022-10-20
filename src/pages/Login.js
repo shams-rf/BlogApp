@@ -6,6 +6,9 @@ import {useNavigate} from "react-router-dom"
 function Login({setIsAuth}) {
     let navigate = useNavigate();
 
+    // Method to log in with Google
+    // Add a variable 'isAuth' to local storage and set it to true
+    // Redirect user to home page
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("isAuth", true);
